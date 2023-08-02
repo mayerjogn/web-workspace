@@ -32,7 +32,7 @@ public class ConfigServlet2 extends HttpServlet {
 			
 			
 			// 3. count값으로 필드 초기화			
-			count = Integer.parseInt(br.readLine());
+			count = Integer.parseInt(br.readLine());// 숫자로 변환할 문자열 입력받고 입력받은 문자열 integer 변환후 int값에 리턴
 			br.close();		//자원반납	
 //			System.out.println("count.txt 파일의 내용을 읽어들임...count :: +" + count);
 		} catch (IOException e) {
