@@ -72,21 +72,28 @@
     </div>
     <script>
            
+      console.log(document.frm);
       function checkData(){
 		
-			const age = document.querySelector("#age");
-			const regExp = /^[0-9]+$/;
-			console.log(regExp.test(age.value));
-		//	console.log("NaN : " + isNaN(age.value));
-			
-						
-			if(regExp.test(age.value) == true){
-				
+		//	const age = document.querySelector("#age");
+		const age = document.frm.age.value;
+		
+		if(isNaN(age)){
+			alert('숫자로 입력해주세요!');
+			return false
+		}else{
 			return true;
-			}else{
-				window.alert("나이는 숫자만 입력하세요!!");
-				return false;
-			}
+		}
+		//	const regExp = /^[0-9]+$/;
+		//	console.log(regExp.test(age.value));
+									
+			//if(regExp.test(age.value) == true){
+				
+		//	return true;
+		//	}else{
+	//			window.alert("숫자만 입력하세요!!");
+		//		return false;
+		//	}
 		
 		}
     </script>

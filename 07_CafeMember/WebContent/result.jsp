@@ -22,19 +22,18 @@
 	<%
 	String name = request.getParameter("name");
 	//List<MemberVO> voList = (List<MemberVO>) application.getAttribute("vo");
-	List<MemberVO> voList =(List) request.getAttribute("voList");
+	
 	%>
 	
 	<div class="container">
-		<%
-		if (name != null) {
-		%>
-		<h4><%=name%>님이 방금전 회원가입을 하셨습니다
-		</h4>
-		<%
-		}
-		%>
-		<hr>
+	<h2>회원조회</h2>
+	<form action="search">
+		검색할 회원 이름을 입력해주세요.<br>
+		<input type="text" name="name"> <input type="submit" value="조회">
+	</form>
+	
+	<hr>
+
 		<h2>전체 회원 정보를 표시합니다</h2>
 
 		<table class="table">
@@ -46,6 +45,7 @@
 
 			<%-- 회원 정보 출력 for문 --%>
 			<%
+			List<MemberVO> voList =(List) request.getAttribute("list");
 			if (voList != null) {
 				for (int i = 0; i < voList.size(); i++) {
 			%>
