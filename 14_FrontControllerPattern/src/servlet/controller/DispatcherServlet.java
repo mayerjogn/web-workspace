@@ -76,8 +76,10 @@ public class DispatcherServlet extends HttpServlet {
 			// 세션에담기
 			HttpSession session = request.getSession();			
 			session.setAttribute("vo", vo);
+			
+			System.out.println("vo :: " + vo);
 						
-			return "index.jsp";	
+			return "views/login_result.jsp";	
 	}
 	
 	protected String find(HttpServletRequest request, HttpServletResponse response) throws ServletException,

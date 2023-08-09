@@ -55,11 +55,11 @@ public class MemberDAO implements MemberDAOTemplate {
 		Connection conn = getConnection();
 //		String query =;
 		
-		System.out.println("id : " + vo.getId());
-		System.out.println("password : " + vo.getPassword());
-		System.out.println("name : " + vo.getName());
-		System.out.println("address : " + vo.getAddress());
-		
+//		System.out.println("id : " + vo.getId());
+//		System.out.println("password : " + vo.getPassword());
+//		System.out.println("name : " + vo.getName());
+//		System.out.println("address : " + vo.getAddress());
+//		
 		PreparedStatement ps = conn.prepareStatement("INSERT INTO member(id, password, name, address) VALUES(?, ?, ?, ?)");
 		
 		ps.setString(1, vo.getId());
@@ -67,7 +67,6 @@ public class MemberDAO implements MemberDAOTemplate {
 		ps.setString(3, vo.getName());
 		ps.setString(4, vo.getAddress());
 		
-
 		System.out.println(ps.executeUpdate());
 		
 		closeAll(ps,conn);
@@ -83,10 +82,10 @@ public class MemberDAO implements MemberDAOTemplate {
 		ps.setString(1, id);
 		ps.setString(2, password);
 		
-		System.out.println("login :: " + password);
+//		System.out.println("login :: " + password);
 		
 		ResultSet rs =ps.executeQuery();
-		MemberVO vo = null;
+		MemberVO vo = null; // 여서 왜 null처리하는지 물어보자
 		if(rs.next()) {
 			vo = new MemberVO();
 			vo.setId(rs.getString("id"));
@@ -107,7 +106,7 @@ public class MemberDAO implements MemberDAOTemplate {
 		ps.setString(1, id);
 		
 		ResultSet rs = ps.executeQuery(); // SELECT문으로 받는 정보니까 rs 쓰고 execute사용
-		MemberVO vo = null;
+		MemberVO vo = null; // 여기도
 		if(rs.next()) {
 			vo = new MemberVO();
 			vo.setId(rs.getString("id"));
@@ -129,7 +128,7 @@ public class MemberDAO implements MemberDAOTemplate {
 		ResultSet rs = ps.executeQuery();
 		ArrayList<MemberVO> list = new ArrayList<>();
 		
-		while(rs.next()) {
+		while(rs.next()) { //왜 반복문임
 			MemberVO vo = new MemberVO();
 			vo.setId(rs.getString("id"));
 			vo.setPassword(rs.getString("password"));
@@ -141,7 +140,7 @@ public class MemberDAO implements MemberDAOTemplate {
 		return list;		
 	}
 	
-	public void updateMember(MemberVO vo) throws SQLException{
+	public void updateMember(MemberVO vo) throws SQLException{ //여긴 왜 조건문이나 반복문없는거고
 		
 			Connection conn =  getConnection();
 			String query = "UPDATE member SET password = ?, name = ?, address = ? WHERE id = ?";
