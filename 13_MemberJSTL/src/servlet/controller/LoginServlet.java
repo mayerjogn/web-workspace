@@ -20,13 +20,15 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
-		String password = request.getParameter("passowrd");
+		String password = request.getParameter("password");
 
 		try {
 			MemberDTO dto = MemberDAO.getInstance().login(id, password);
 
 			HttpSession session = request.getSession();
 			session.setAttribute("dto", dto);
+			
+			System.out.println(dto);
 
 			response.sendRedirect("views/login_result.jsp");
 		} catch (SQLException e) {

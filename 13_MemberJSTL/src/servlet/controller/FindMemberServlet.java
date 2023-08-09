@@ -25,7 +25,7 @@ public class FindMemberServlet extends HttpServlet {
 				request.setAttribute("dto", dto);
 				request.getRequestDispatcher("views/find_ok.jsp").forward(request, response);
 			}else {
-				response.sendRedirect("views/find_fil.jsp");
+				response.sendRedirect("views/find_fail.jsp");
 			}
 		} catch (SQLException e) {}
 	}

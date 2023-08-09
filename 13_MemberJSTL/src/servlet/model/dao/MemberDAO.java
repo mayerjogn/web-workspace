@@ -92,6 +92,8 @@ public class MemberDAO implements MemberDAOTemplate {
 		ps.setString(1, id);
 		ps.setString(2, password);
 		
+		System.out.println("login :: " + password);
+		
 		ResultSet rs =ps.executeQuery();
 		MemberDTO dto = null;
 		if(rs.next()) {
@@ -150,25 +152,22 @@ public class MemberDAO implements MemberDAOTemplate {
 	}
 
 	
-	/// try catch 문 왜 쳐들어가는건데 도대체
-	public void updateMember(String id, String password, String name, String address) throws SQLException{
+	
+	public void updateMember(MemberDTO dto) throws SQLException{
 		
 			Connection conn =  getConnection();
-			String query = "UPDATE MEMBER SET PASSWORD = ?, NAME = ?, ADDRESS = ? WHERE ID = ?";
+			String query = "UPDATE member SET password = ?, name = ?, address = ? WHERE id = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
 			
-			ps.setString(1, id);
-			ps.setString(2, password);
-			ps.setString(3, name);
-			ps.setString(4, address);
+			ps.setString(1, dto.getPassword());
+			ps.setString(2, dto.getName());
+			ps.setString(3, dto.getAddress());
+			ps.setString(4, dto.getId());
 			
-			ps.executeUpdate();
-			
+			ps.executeUpdate();		
 			closeAll(ps,conn);
 			}
-	
-	
-
+		
 public static void main(String[] args) {
 	// 메인에서 register login 확인
 	MemberDAO dao = new MemberDAO();
