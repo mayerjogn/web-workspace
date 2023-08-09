@@ -24,7 +24,7 @@
 		<c:otherwise>
 			<!--<c:if test="${empty dto}">-->
 			<h3>로그인 실패..! 다시 로그인 하세요</h3>
-			<a href="views/login.html">login.html</a>
+			<a href="/login.html">login.html</a>
 			<!--</c:if>-->
 		</c:otherwise>
 	</c:choose>
