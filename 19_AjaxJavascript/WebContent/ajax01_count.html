@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <h2>Show Count</h2>
+    <input type="button" value="count 증가" onclick="startRequest()" />
+    <div id="resultView"></div>
+
+    <script>
+      let xhr; // XML Http Request의 약자
+      function startRequest() {
+        // 요청에 해당하는 로직을 담는 함수
+        xhr = new XMLHttpRequest(); // 서버랑 상호 하기위한 비동기적으로 처리하기 위한것
+        // alert(xhr.readyState); // 0
+
+        xhr.onreadystatechange = callback;
+        //alert(xhr.readyState); // 0
+        xhr.open("get", "CountServlet?id=ajax&&pass=1212");
+        // alert(xhr.readyState); // 1
+
+        xhr.send(null); // send일 때 서버로 날라간다 즉 실질적인 요청이 이때 들어간다 null은 get방식이어서 들어감
+        // alert(xhr.readyState) // 0에서 4까지 와야 서버에 갔다 왔다는것
+      }
+      function callback() {
+        // 응답의 로직을 담는함수
+
+        // alert("callback :: " + xhr.readyState); // 1
+        if (xhr.readyState === 4) {
+          // console.log(xhr.status);
+          if (xhr.status === 200) {
+            const text = xhr.responseText;
+            document.querySelector("#resultView").innerHTML =
+              "<h4>" + text + "</h4>";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
