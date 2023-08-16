@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  </head>
+  <body>
+    <h1>Local Storage TEST</h1>
+    <button onclick="add()">추가</button>
+    <button onclick="view()">보기</button>
+    <button onclick="remove()">삭제</button>
+    <div id="resultView"></div>
+    <script>
+      function add() {
+    	  localStorage.setItem("test","Item1"); // 추가할때는 setItem
+      }
+      function view() {
+    	  document.querySelector("#resultView").innerHTML = localStorage.getItem("test"); // 볼때는 getItem
+      }
+      function remove() {
+    	  localStorage.removeItem("test");// 삭제할때
+    	  location.reload(); // 걍 새로고침임
+      }
+    </script>
+  </body>
+</html>

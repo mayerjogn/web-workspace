@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  </head>
+  <body>
+    <h2>Register Form..</h2>
+
+    <form id="frm">
+      NAME : <input type="text" name="name" id="name" /><br />
+      ADDR : <input type="text" name="addr" id="addr" /><br />
+      <input type="button" value="가입" id="regBtn" />
+    </form>
+    <div id="regView"></div>
+
+    <script>
+      $("#regBtn").click(function () {
+        const name = $("#name").val();
+        const addr = $("#addr").val();
+
+        $.ajax({
+          type: "post",
+          url: "SerializeAjax",
+          data: $('#frm').serialize(), // 이럴때 form태그를 활용하면 다 넘길수있음
+
+          success: function (data) {
+            $("#regView").html(data).css({
+              background: "green",
+              color: "black",
+              "font-weight": "bold",
+            });
+          },
+        });
+      });
+    </script>
+    <!-- post 방식 / SerialAjax -->
+  </body>
+</html>
