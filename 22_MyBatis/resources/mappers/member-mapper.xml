@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	<!-- namespace : 해당 mapper 파일의 고유한 별칭 -->
+	
+	<!-- 
+		* DML문일 경우
+		<insert | update | delete id="식별자(속성)" parameterType="전달받을 자바타입(풀클래스명) | 별칭">
+		쿼리문
+		</insert | update | delete>
+		
+		* SELECT문일 경우
+		<select id="식별자(속성)" [parameterType="전달받을 자바타입(풀클래스명) | 별칭"]> 파라미터 타입은 없을때도있음
+					resultType="조회결과를 반환하고자 하는 자바타입" | resultMap="조회결과를 뽑아서 매핑할 resultMap의 id">
+		쿼리문
+		</select>
+	
+		? 대신에 해당 sql문의 전달된 객체로부터 값을 꺼낼 때 #{필드명 또는 변수명 또는 키값} 이용
+	 -->
+	<insert id="registermember" parameterType="Member">
+		INSERT INTO member(id, password, name, address)
+		VALUES(#{id}, #{password}, #{name}, #{address})
+	</insert>
+	
+	<!-- showAllMember, findByIdMember, login, updateMember -->
+	
+	<select id="showAllMember" resultType="ArrayList">
+	SELECT * FROM member
+	resultType=""
+	</select>
+	
+	<select id="findByIdMember" resultType="Member">
+	SELECT * FROM member WHERE #{id}
+	resultType=""
+	</select>
+		
+	<select id="login" resultType="Member">
+	SELECT * FROM member WHERE #{id} and #{password}
+	resultType=""
+	</select>	
+		
+		
+	<update id="updateMember" parameterType="Member">
+		UPDATE member SET(#{password}, #{name}, #{address})		
+	</update>
+</mapper>

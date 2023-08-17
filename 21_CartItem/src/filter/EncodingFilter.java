@@ -1,4 +1,4 @@
-package servlet.filter;
+package filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpFilter;
 
-@WebFilter(value= {"/*"}, initParams=@WebInitParam(name="encoding", value="utf-8"))
+@WebFilter(value = {"/*"}, initParams = @WebInitParam(name = "encoding", value = "utf-8"))
 public class EncodingFilter extends HttpFilter implements Filter {
        
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

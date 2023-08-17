@@ -12,6 +12,7 @@ import config.ServerInfo;
 public class ItemDAO implements ItemDAOTemplate {
 
 	private static ItemDAO dao = new ItemDAO();
+	
 	private ItemDAO() {
 		try {
 			Class.forName(ServerInfo.DRIVER_NAME);
@@ -40,52 +41,67 @@ public class ItemDAO implements ItemDAOTemplate {
 	@Override
 	public ArrayList<Item> getAllItem() throws SQLException {
 		Connection conn = getConnection();
-		String query = "SELECT* FROM ITEM";
+		
+		String query = "SELECT * FROM ITEM";
 		PreparedStatement ps = conn.prepareStatement(query);
-		ResultSet rs = ps.executeQuery();
+		
 		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rs = ps.executeQuery();
 		
 		while(rs.next()) {
 			Item item = new Item();
-			item.setItemId(rs.getInt("itemId"));
-			item.setItemName(rs.getString("itemName"));
+			item.setItemId(rs.getInt("item_id"));
+			item.setItemName(rs.getString("item_name"));
 			item.setPrice(rs.getInt("price"));
 			item.setDescription(rs.getString("description"));
-			item.setPictureUrl(rs.getString("pictureUrl"));
+			item.setPictureUrl(rs.getString("picture_url"));
 			item.setCount(rs.getInt("count"));
+			System.out.println("item :: " + item);
 			list.add(item);
+//			list.add(new Item(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getInt(6)));
 		}
 		closeAll(rs, ps, conn);
 		return list;
 	}
 	@Override
 	public Item getItem(int itemId) throws SQLException {
+		
 		Connection conn = getConnection();
-		Item item = new Item();
+		
 		
 		String query = "SELECT * FROM ITEM WHERE ITEM_ID=?";
 		PreparedStatement ps = conn.prepareStatement(query);		
-		ps.setInt(1, itemId);
 		
+		ps.setInt(1, itemId);		
 		ResultSet rs = ps.executeQuery();
-		while(rs.next()) {
-			
-			item.setItemId(rs.getInt("itemId"));
-			item.setItemName(rs.getString("itemName"));
-			item.setPrice(rs.getInt("price"));
-			item.setDescription(rs.getString("description"));
-			item.setPictureUrl(rs.getString("pictureUrl"));
-			item.setCount(rs.getInt("count"));
-			
+		
+		Item item = null;
+		if(rs.next()) {
+			item = new Item(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getInt(6));
+//			item.setItemId(rs.getInt("item_Id"));
+//			item.setItemName(rs.getString("item_Name"));
+//			item.setPrice(rs.getInt("price"));
+//			item.setDescription(rs.getString("description"));
+//			item.setPictureUrl(rs.getString("picture_Url"));
+//			item.setCount(rs.getInt("count"));			
 		}
 		closeAll(rs, ps, conn);
 		return item;
 	}
 	@Override
 	public boolean updateRecordCount(int itemId) throws SQLException {
-//		Connection conn = getConnection();
-//		String query = "SELECT * FROM ITEM WHERE ITEM_ID=?";
-//		PreparedStatement ps = conn.prepareStatement(query);
-		return false;
+		Connection conn = getConnection();
+		
+		String query = "UPDATE ITEM SET COUNT=COUNT+1 WHERE ITEM_ID=?";
+		PreparedStatement ps = conn.prepareStatement(query);		
+		ps.setInt(1, itemId);
+		
+		int row = ps.executeUpdate();
+		boolean result = false;
+		if(row>0) result=true;
+		
+		closeAll(ps,conn);
+		
+		return result;
 	}
 }
