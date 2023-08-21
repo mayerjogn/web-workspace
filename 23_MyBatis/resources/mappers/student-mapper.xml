@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	resultMap에서 TB_STUDENT, TB_DEPARTMENT
+	id, result <-- 앞에서 배운건 여기까지
+	<association property="department" resultMap="department"/>을 사용해야 student department를 같이사용
+	
+	showStnudent 
+ -->
+ 
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+ 
+ <resultMap type="Student" id="studentMap">
+ 
+  <id property="" column="STUDENT_NAME"/>
+  <result property="" column="STUDENT_NO"/>
+  <result property="" column="STUDENT_ADDRESS"/>
+  <result property="" column="DEPARTMENT_NAME"/>
+  <result property="" column="CATEGORY"/>
+  
+ </resultMap>
+
+ <select id="showStudent" parameterType="String">
+ 	<!--  #{name} : 조건 - name이 null인지 아닌지
+ 		   WHERE student_no, student_name, student_address, department_name, category 랑 name이 포함되어 있는지
+ 		   이 중 하나만 일치해도 나오면 되니까 OR 사용
+ 	-->
+ 	SELECT STUDENT_NO, STUDENT_NAME, STUDENT_ADDRESS, DEPARTMENT_NAME, CATEGORY
+ 	FROM TB_STUDENT
+ 	JOIN TB_DEPARTMENT USING (DEPARTMENT_NO)
+ 		<if test="name !=null">
+ 			<where>
+ 				STUDENT_NO LIKE '%'||#{name}||'%' OR
+ 				STUDENT_NAME LIKE '%'||#{name}||'%' OR
+ 				STUDENT_ADDRESS LIKE '%'||#{name}||'%' OR
+ 				DEPARTMENT_NAME LIKE '%'||#{name}||'%' OR
+ 				CATEGORY LIKE '%'||#{name}||'%' 
+ 			</where>
+ 		</if>
+ 		
+ 	</trim>
+ </select>

@@ -39,7 +39,7 @@ public class DispatcherServlet extends HttpServlet {
 		} catch (Exception e) {
 			
 			System.out.println("dispatcher:");
-			e.printStackTrace();
+			e.printStackTrace(); // 이게 에러 보여주는거임
 			System.out.println("-------------");
 		}
 	}	
