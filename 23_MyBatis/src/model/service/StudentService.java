@@ -1,6 +1,5 @@
 package model.service;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,13 +10,13 @@ import model.vo.StudentVO;
 
 public class StudentService {
 
-	
-	
-	public List<StudentVO> showStudent(String name){
-		
-		SqlSession sqlSession = Template.getSqlSession();
-		List<StudentVO>list = new StudentDAO().showStudent(sqlSession, name);
-			return list;
+	public List<StudentVO> showStudent(String name) {
+			
+		SqlSession sqlSession = Template.getSqlSession();		
+		List<StudentVO> list = StudentDAO.getInstance().showStudent(sqlSession,name);
+		sqlSession.close();
+//		System.out.println(list);
+		return list;		
 	}
 //	public List<StudentVO> AllStudentShow(String[] idList){
 //		SqlSession sqlSession = Template.getSqlSession();
@@ -26,4 +25,5 @@ public class StudentService {
 //			sqlSession.close();		
 //		return student;
 //	}
+	
 }

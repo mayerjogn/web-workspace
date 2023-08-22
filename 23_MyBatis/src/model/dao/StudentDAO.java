@@ -12,12 +12,15 @@ public class StudentDAO {
 	public StudentDAO() {}
 	public static StudentDAO getInstance() {
 		return dao;
-	}
-	public List<StudentVO> showStudent(SqlSession sqlSession, String name){
-		
+	}			
+	//, String name
+	public List<StudentVO> showStudent(SqlSession sqlSession,String name){
+//		System.out.println(name);                      
 		return sqlSession.selectList("studentMapper.showStudent", name);
 	}
+	
 //	public List<StudentVO> AllStudentShow(SqlSession sqlSession, List<String> list){
 //		return sqlSession.selectList("studentMapper.findStudent");
 //	}
+	
 }
