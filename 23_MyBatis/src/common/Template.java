@@ -22,7 +22,7 @@ public class Template {
 			SqlSessionFactoryBuilder bulider = new SqlSessionFactoryBuilder();
 			SqlSessionFactory factory = bulider.build(stream);
 			
-			session = factory.openSession(false);
+			session = factory.openSession(false); //자동으로 커밋되지 않게 하기위해
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
